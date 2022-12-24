@@ -22,6 +22,8 @@ namespace Exam_Checkers
         DirectoryInfo dir = new DirectoryInfo(Directory.GetCurrentDirectory());
         Image white_figure;
         Image black_figure;
+        Image white_crown;
+        Image black_crown;
         const int map_size = 8;
         int[,] map = new int[map_size, map_size];
         int cell_size = 80;
@@ -41,13 +43,21 @@ namespace Exam_Checkers
         int score_white = 0;
         public Form1()
         {
+            
             InitializeComponent();
             dir = dir.Parent.Parent;
             white_figure = new Bitmap(Image.FromFile(dir.FullName + "\\Images\\white.png"), new Size(cell_size - 8, cell_size - 8));
             black_figure = new Bitmap(Image.FromFile(dir.FullName + "\\Images\\black.png"), new Size(cell_size - 8, cell_size - 8));
+            white_crown= new Bitmap(Image.FromFile(dir.FullName + "\\Images\\white_crown.png"), new Size(cell_size - 8, cell_size - 8));
+            black_crown= new Bitmap(Image.FromFile(dir.FullName + "\\Images\\black_crown.png"), new Size(cell_size - 8, cell_size - 8));
             StartPosition = FormStartPosition.CenterScreen;
             FieldGame();
         }
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            e.Graphics.DrawLine(Pens.Yellow, 0, 0, 100, 100);
+        }
+       
         public void FieldGame()
         {
             current_player = 1;
@@ -64,10 +74,6 @@ namespace Exam_Checkers
                 { 0,1,0,1,0,1,0,1 },
                 { 1,0,1,0,1,0,1,0 }
             };
-            CreateCellOnTheMap();
-        }
-        public void CreateCellOnTheMap()
-        {
             for (int i = 0; i < map_size; i++)
             {
                 for (int j = 0; j < map_size; j++)
@@ -178,7 +184,9 @@ namespace Exam_Checkers
                     CloseChecker();
                     DeactivateAllButtons();
                     if (pressed_button.Text == "Q")
+                    {
                         ShowSteps(pressed_button.Location.Y / cell_size, pressed_button.Location.X / cell_size, false);
+                    }   
                     else ShowSteps(pressed_button.Location.Y / cell_size, pressed_button.Location.X / cell_size,true);
                     if (countEatSteps == 0 || !isContinue)
                     {
@@ -229,11 +237,12 @@ namespace Exam_Checkers
             if (map[button.Location.Y / cell_size, button.Location.X / cell_size] == 2 && button.Location.Y / cell_size == map_size - 1)
             {
                 button.Text = "Q";
-
+                button.Image = black_crown;
             }
             if (map[button.Location.Y / cell_size, button.Location.X / cell_size] == 1 && button.Location.Y / cell_size == 0)
             {
                 button.Text = "Q";
+                button.Image = white_crown;
             }
         }
 

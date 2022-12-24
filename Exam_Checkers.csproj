@@ -83,9 +83,10 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="Images\black.png" />
-    <Content Include="Images\w.jpg" />
-    <Content Include="Images\b.jpg" />
+    <Content Include="Images\black_crown.png" />
+    <Content Include="Images\crown.png" />
     <Content Include="Images\white.png" />
+    <Content Include="Images\white_crown.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
